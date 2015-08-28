@@ -301,6 +301,53 @@ iOS的动画以及自定义图形，开个专栏总结。
 ```objective-c
 [UIApplication sharedApplication].statusBarHidden = YES;
 ```
+.m文件与.mm文件的区别
+```objective-c
+.m文件是objective-c文件
+.mm文件相当于c++或者c文件
+```
+Safari其实没有把内存的缓存写到存储卡上
+
+读取一般性文件
+```objective-c
+- (void)readFromTXT {
+    NSString *tmp;
+    NSArray *lines;//将文件转化为一行一行的
+    lines = [[NSString stringWithContentsOfFile:@"testFileReadLines.txt"] componentsSeparatedByString:@"\n"];
+    
+    NSEnumerator *nse = [lines objectEnumerator];
+    
+    //读取<>里的内容
+    while (tmp == [nse nextObject]) {
+        NSString *stringBetweenBrackets = nil;
+        NSScanner *scanner = [NSScanner scannerWithString:tmp];
+        [scanner scanUpToString:@"<" intoString:nil];
+        [scanner scanString:@"<" intoString:nil];
+        [scanner scanUpToString:@">" intoString:&stringBetweenBrackets];
+        NSLog(@"%@",[stringBetweenBrackets description]);
+    }
+}
+```
+隐藏`UINavigationBar`
+```objective-c
+ [self.navigationController setNavigationBarHidden:YES animated:YES];
+```
+
+调用电话，短信，邮件
+```objective-c
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:apple@mac.com?Subject=hello"]];
+sms://调用短信
+tel://调用电话
+itms://打开MobileStore.app
+```
+获取版本信息
+```objective-c
+UIDevice *myDevice = [UIDevice currentDevice];
+NSString *systemVersion = myDevice.systemVersion;
+```
+
+
+（未完待续）
 
 总结
 ----------
