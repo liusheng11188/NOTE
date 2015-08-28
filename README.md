@@ -1,7 +1,8 @@
 前言
 ----------
-
 个人首发：http://segmentfault.com/a/1190000003505115
+
+个人感觉简书和Segment Fault的markdown好用一些。。。
 
 iOS开发过程中，总有那么一些个小问题让人纠结，它们不会让程序崩溃，但是会让人崩溃。除此之外，还将分享一些细节现在我通过自己的总结以及从其他地方的引用，来总结一下一些常见小问题。
 
@@ -17,7 +18,7 @@ iOS高级开发实战讲解
 ```objective-c
 <UITextFieldDelegate>
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
