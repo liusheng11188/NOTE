@@ -190,6 +190,32 @@ NSString *escapedString = [oriString stringByReplacingPercentEscapesUsingEncodin
     return YES;
 }
 ```
+设置日期格式
+
+```c++
+dateFormatter = [[NSDateFormatter alloc]init];
+dateFormatter.locale = [NSLocale currentLocale];
+dateFormatter.calendar = [NSCalendar autoupdatingCurrentCalendar];
+dateFormatter.timeZone = [NSTimeZone defaultTimeZone];
+dateFormatter.dateStyle = NSDateFormatterShortStyle;
+NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
+```
+加载大量图片的时候，可以使用
+
+```
+NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"];
+UIImage *myImage = [UIImage imageWithContentsOfFile:imagePath];
+```
+有时候在iPhone游戏中，既要播放背景音乐，同时又要播放比如枪的开火音效。
+
+```
+NSString *musicFilePath = [[NSBundle mainBundle] pathForResource:@"xx" ofType:@"wav"];
+NSURL *musicURL = [NSURL fileURLWithPath:musicFilePath];
+AVAudioPlayer *musicPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:musicURL error:nil];
+[musicPlayer prepareToPlay];
+musicPlayer.volume = 1;
+musicPlayer.numberOfLoops = -1;//-1表示一直循环
+```
 
 总结
 ----------
