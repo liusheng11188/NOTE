@@ -14,7 +14,7 @@ iOS高级开发实战讲解
 这里我不是每一个都收录进来，这里只是放出一部分，有些用的太多，我就没整理了，大家如果想看可以去看原文。
 
 返回输入键盘
-```
+```objective-c
 <UITextFieldDelegate>
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -23,23 +23,23 @@ iOS高级开发实战讲解
 }
 ```
 CGRect
-```
+```objective-c
 CGRectFromString(<#NSString *string#>)//有字符串恢复出矩形
 CGRectInset(<#CGRect rect#>, <#CGFloat dx#>, <#CGFloat dy#>)//创建较小或者较大的矩形
 CGRectIntersectsRect(<#CGRect rect1#>, <#CGRect rect2#>)//判断两巨星是否交叉，是否重叠
 CGRectZero//高度和宽度为零的，位于（0，0）的矩形常量
 ```
 隐藏状态栏
-```
+```objective-c
 [UIApplication sharedApplication] setStatusBarHidden:<#(BOOL)#> withAnimation:<#(UIStatusBarAnimation)#>//隐藏状态栏
 ```
 自动适应父视图大小
-```
+```objective-c
 self.view.autoresizesSubviews = YES;
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 ```
 UITableView的一些方法
-```
+```objective-c
 这里我自己做了个测试，缩进级别设置为行号，row越大，缩进越多
 <UITableViewDelegate>
 
@@ -50,55 +50,55 @@ UITableView的一些方法
 ```
 把plist文件中的数据赋给数组
 
-```
+```objective-c
 NSString *path = [[NSBundle mainBundle] pathForResource:@"States" ofType:@"plist"];
 NSArray *array = [NSArray arrayWithContentsOfFile:path];
 ```
 获取触摸的点
 
-```
+```objective-c
 - (CGPoint)locationInView:(UIView *)view;
 - (CGPoint)previousLocationInView:(UIView *)view;
 ```
 获取触摸的属性
 
-```
+```objective-c
 @property(nonatomic,readonly) NSTimeInterval      timestamp;
 @property(nonatomic,readonly) UITouchPhase        phase;
 @property(nonatomic,readonly) NSUInteger          tapCount;
 ```
 从plist中获取数据赋给字典
 
-```
+```objective-c
 NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"book" ofType:@"plist"];
 NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 ```
 NSUserDefaults注意事项
 
-```
+```objective-c
 设置完了以后如果存储的东西比较重要的话，一定要同步一下
 [[NSUserDefaults standardUserDefaults] synchronize];
 ```
 
 获取Documents目录
 
-```
+```objective-c
 NSString *documentsDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 ```
 获取tmp目录
 
-```
+```objective-c
 NSString *tmpPath = NSTemporaryDirectory();
 ```
 利用Safari打开一个链接
 
-```
+```objective-c
 NSURL *url = [NSURL URLWithString:@"http://baidu.com"];
 [[UIApplication sharedApplication] openURL:url];
 ```
 利用UIWebView显示pdf文件，网页等等
 
-```
+```objective-c
 <UIWebViewDelegate>
 
 UIWebView *webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
@@ -115,7 +115,7 @@ NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:(NSURLReque
 ```
 UIWebView和html的简单交互
 
-```
+```objective-c
 myWebView = [[UIWebView alloc]initWithFrame:self.view.bounds];
 [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
 NSError *error;
@@ -133,12 +133,12 @@ NSString *errorString = [NSString stringWithFormat:@"<html><center><font size=+5
 ```
 汉字转码
 
-```
+```objective-c
 NSString *oriString = @"\u67aa\u738b";
 NSString *escapedString = [oriString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 ```
 处理键盘通知
-```
+```objective-c
 先注册通知，然后实现具体当键盘弹出来要做什么，键盘收起来要做什么
 - (void)registerForKeyboardNotifications {
     keyboardShown = NO;//标记当前键盘是没有显示的
@@ -176,7 +176,7 @@ NSString *escapedString = [oriString stringByReplacingPercentEscapesUsingEncodin
 ```
 点击键盘的next按钮，在不同的textField之间换行
 
-```
+```objective-c
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if ([textField returnKeyType] != UIReturnKeyDone) {
@@ -192,7 +192,7 @@ NSString *escapedString = [oriString stringByReplacingPercentEscapesUsingEncodin
 ```
 设置日期格式
 
-```c++
+```objective-c
 dateFormatter = [[NSDateFormatter alloc]init];
 dateFormatter.locale = [NSLocale currentLocale];
 dateFormatter.calendar = [NSCalendar autoupdatingCurrentCalendar];
@@ -202,13 +202,13 @@ NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
 ```
 加载大量图片的时候，可以使用
 
-```
+```objective-c
 NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"icon" ofType:@"png"];
 UIImage *myImage = [UIImage imageWithContentsOfFile:imagePath];
 ```
 有时候在iPhone游戏中，既要播放背景音乐，同时又要播放比如枪的开火音效。
 
-```
+```objective-c
 NSString *musicFilePath = [[NSBundle mainBundle] pathForResource:@"xx" ofType:@"wav"];
 NSURL *musicURL = [NSURL fileURLWithPath:musicFilePath];
 AVAudioPlayer *musicPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:musicURL error:nil];
