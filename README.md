@@ -346,7 +346,83 @@ itms://打开MobileStore.app
 UIDevice *myDevice = [UIDevice currentDevice];
 NSString *systemVersion = myDevice.systemVersion;
 ```
+`UIWebView`的使用
+```objective-c
+<UIWebViewDelegate>
 
+webView.delegate = self;
+
+(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *url = request.URL;
+    NSString *urlStirng = url.absoluteString;
+    NSLog(@"%@",urlStirng);
+    return YES;
+}
+```
+`UIButton`的`title`和`image`不能同时显示
+`UINavigationItem`也是
+
+不要再语言包里面设置空格
+
+`NSNotificationCenter`带参数发送
+```objective-c
+MPMoviePlayerController *theMovie = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL fileURLWithPath:moviePath]];
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myMovieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:theMovie];
+[theMovie play];
+
+- (void)myMovieFinishedCallback:(NSNotification *)aNotification {
+    MPMoviePlayerController *theMovie = [aNotification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:theMovie];
+}
+```
+延迟一段时间执行某个函数
+```objective-c
+[self performSelector:@selector(dismissModal) withObject:self afterDelay:1.0];
+```
+用`NSDateFormatter`调整时间格式代码
+```objective-c
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+```
+`UIView`设置成圆角的方法
+```objective-c
+mainView.layer.cornerRadius = 6;
+mainView.layer.masksToBounds = YES;
+```
+Objective-C 内存管理
+
+1. 一个对象可以有一个或多个拥有者
+2. 当它一个拥有者都没有的时候，它就会被回收
+3. 如果想保留一个对象不被回收，你就必须成为它的拥有者
+
+关键字
+1. alloc
+为对象分配内存，计数设为1，并返回此对象。
+- copy
+复制一个对象，此对象计数为1，返回此对象。你将成为此克隆对象的拥有者。
+- retain
+对象计数+1，并成为次对象的拥有者。
+- release
+对象计数-1，并丢掉此对象。
+- autorelease
+在未来的某一个时刻，对象计数-1。并在未来的某个时间放弃此对象。
+
+原则
+1. 一个代码块内要确保copy，alloc 和 retain 的使用数量与 release 和 autorelease 的数量相等。
+- 在使用以 alloc 或 new 开头或包含 copy 的方法，或 retain 一个对象时，你将会编程它的拥有者。
+- 实现 dealloc 方法，这是系统当 retain -> 0 的时候，自动调用的。手动调用会引起 retain count 计数错误（多一次的 release）。
+
+iPhone 更改键盘右下角按键的 type
+```objective-c
+SearchBar *mySearchBar = [[UISearchBar alloc]init];
+mySearchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+mySearchBar.placeholder = @"placeholderString";
+mySearchBar.delegate = self;
+[self.view addSubview:mySearchBar];
+UITextField *searchField = [[mySearchBar subviews] lastObject];
+searchField.returnKeyType = UIReturnKeyDone;
+```
 
 （未完待续）
 
