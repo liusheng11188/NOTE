@@ -217,6 +217,90 @@ AVAudioPlayer *musicPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:musicUR
 musicPlayer.volume = 1;
 musicPlayer.numberOfLoops = -1;//-1表示一直循环
 ```
+从通讯录中读取电话号码，去掉数字之间的-
+```objective-c
+NSString *originalString = @"(123)123123abc";
+NSMutableString *strippedString = [NSMutableString stringWithCapacity:originalString.length];
+NSScanner *scanner = [NSScanner scannerWithString:originalString];
+NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+
+    while ([scanner isAtEnd] == NO) {
+        NSString *buffer;
+        if ([scanner scanCharactersFromSet:numbers intoString:&buffer]) {
+            [strippedString appendString:buffer];
+        }else {
+            scanner.scanLocation = [scanner scanLocation] + 1;
+        }
+    }
+    NSLog(@"%@",strippedString);
+```
+正则判断：字符串只包含字母和数字
+```objective-c
+
+NSString *myString = @"Letter1234";
+NSString *regex = @"[a-z][A-Z][0-9]";
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+
+    if ([predicate evaluateWithObject:myString]) {
+        //implement
+    }
+```
+设置`UITableView`的滚动条颜色
+```objective-c
+self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+```
+
+网络编程
+开发web等网络应用程序的时候，需要确认网络环境，连接情况等信息。如果没有处理它们，是不会通过apple的审查的。
+系统自带的网络检查是原生的，AFNetworking也为我们添加了相关检测机制，所以这个直接在介绍AFNetworking的时候详解吧。
+
+使用`NSURLConnection`下载数据
+```objective-c
+1. 创建对象
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    [NSURLConnection connectionWithRequest:request delegate:self];
+2. NSURLConnection delegate 委托方法
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+}
+
+3. 实现委托方法
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    self.receiveData.length = 0;//先清空数据
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.receiveData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    //错误处理
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSString *returnString = [[NSString alloc]initWithData:self.receiveData encoding:NSUTF8StringEncoding];
+    firstTimeDownloaded = YES;
+}
+```
+iOS的动画已经自定义图形，开个专栏总结。
+
+隐藏状态栏
+```objective-c
+[UIApplication sharedApplication].statusBarHidden = YES;
+```
 
 总结
 ----------
