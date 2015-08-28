@@ -258,7 +258,8 @@ self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
 ```objective-c
 1. 创建对象
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    [NSURLConnection connectionWithRequest:request delegate:self];
+[NSURLConnection connectionWithRequest:request delegate:self];
+
 2. NSURLConnection delegate 委托方法
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 
