@@ -426,11 +426,10 @@ UITextField *searchField = [[mySearchBar subviews] lastObject];
 searchField.returnKeyType = UIReturnKeyDone;
 ```
 
-（未完待续）
+（更新完成）
 
 总结
 ----------
 不积跬步无以至千里，不积小流无以成江海。
-（随时更新）
 
   [1]: http://download.csdn.net/detail/spritekit/8426869
