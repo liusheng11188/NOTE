@@ -397,6 +397,7 @@ Objective-C 内存管理
 3. 如果想保留一个对象不被回收，你就必须成为它的拥有者
 
 关键字
+
 1. alloc
 为对象分配内存，计数设为1，并返回此对象。
 - copy
@@ -409,6 +410,7 @@ Objective-C 内存管理
 在未来的某一个时刻，对象计数-1。并在未来的某个时间放弃此对象。
 
 原则
+
 1. 一个代码块内要确保copy，alloc 和 retain 的使用数量与 release 和 autorelease 的数量相等。
 - 在使用以 alloc 或 new 开头或包含 copy 的方法，或 retain 一个对象时，你将会编程它的拥有者。
 - 实现 dealloc 方法，这是系统当 retain -> 0 的时候，自动调用的。手动调用会引起 retain count 计数错误（多一次的 release）。
