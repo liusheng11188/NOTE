@@ -295,7 +295,7 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
     firstTimeDownloaded = YES;
 }
 ```
-iOS的动画已经自定义图形，开个专栏总结。
+iOS的动画以及自定义图形，开个专栏总结。
 
 隐藏状态栏
 ```objective-c
