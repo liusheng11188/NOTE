@@ -1,6 +1,7 @@
 前言
 ----------
-个人首发：http://segmentfault.com/a/1190000003505115
+segmentFault：http://segmentfault.com/a/1190000003505115
+简书：http://www.jianshu.com/p/28f7d1f963a7
 
 个人感觉简书和Segment Fault的markdown好用一些。。。
 
